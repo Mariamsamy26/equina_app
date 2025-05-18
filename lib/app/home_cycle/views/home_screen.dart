@@ -10,10 +10,10 @@ import 'package:equina_task/styles/text_mang.dart';
 import 'package:equina_task/widget/loding_gif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
-
   // ignore: use_super_parameters
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -21,7 +21,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
 
   @override
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // OuthApis().userId
+
     context.read<LessonsProvider>().getAllLessons(55);
   }
 
@@ -74,8 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(width: 10.w),
 
           InkWell(
-            onTap: () {
-            },
+            onTap: () {},
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50.r),
@@ -93,11 +94,13 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(width: 10.w),
 
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigation().goToScreen(context, (c) => ProfileScreen());
             },
             child: Container(
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.r)),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5.r),
+              ),
               width: 30.w,
               height: 25.h,
               child: Image.asset(
@@ -118,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             Container(
-              height: AppDimentions().availableheightWithAppBar*0.08,
+              height: AppDimentions().availableheightWithAppBar * 0.08,
               padding: EdgeInsets.symmetric(vertical: 0.h),
               color: white,
               child: Row(
@@ -190,46 +193,52 @@ class _HomeScreenState extends State<HomeScreen> {
               child:
                   lessons == null
                       ? const Center(child: LodingGif())
-                      : ListView.builder(
-                        itemCount: lessons.length,
-                        itemBuilder: (context, index) {
-                          final lesson = lessons[index];
-                          return GestureDetector(
-                            onTap:
-                                () => Navigation().goToScreen(
-                                  context,
-                                  (C) => LessonsDetailsScreen(lesson: lesson,),
-                                ),
-                            child: AssessmentTinaCard(
-                              title: lesson.trainingTypes ?? " ",
-                              clubName: lesson.categoryName ?? " ",
-                              description: lesson.description!,
-                              type: lesson.lessontype ?? " ",
-                              duration: lesson.classDuration .toString().substring(0, 2),
-                              numberOfClasses:(lesson.numOfClasses ?? 0).ceil(),
-                              price:lowPrice([
-                                lesson.childClubHorseGroup !,
-                                lesson.childClubHorsePrivate !,
-                                lesson.childClubHorseSemiPrivate !,
-                                lesson.childOwnHorseGroup !,
-                                lesson.childOwnHorsePrivate !,
-                                lesson.childOwnHorseSemiPrivate !,
-
-                                lesson.adultClubHorseGroup !,
-                                lesson.adultClubHorsePrivate !,
-                                lesson.adultClubHorseSemiPrivate !,
-                                lesson.adultOwnHorseGroup !,
-                                lesson.adultOwnHorsePrivate !,
-                                lesson.adultOwnHorseSemiPrivate !,
-                              ] ).ceil().toString(),
-                              lessonCurrency: lesson.lessonCurrency ?? "",
-                              imagePath: lesson.imageUrl!,
-                              discountText: "-200 AED Discount" ,
-                              availableDays:  lesson.days ?? [],
-                              initialRating:lesson.clubRating ?? 0,
-                            ),
-                          );
-                        },
+                      : SlidableAutoCloseBehavior(
+                        child: ListView.builder(
+                          itemCount: lessons.length,
+                          itemBuilder: (context, index) {
+                            final lesson = lessons[index];
+                            return GestureDetector(
+                              onTap:
+                                  () => Navigation().goToScreen(
+                                    context,
+                                    (C) => LessonsDetailsScreen(lesson: lesson),
+                                  ),
+                              child: AssessmentTinaCard(
+                                title: lesson.trainingTypes ?? " ",
+                                clubName: lesson.categoryName ?? " ",
+                                description: lesson.description!,
+                                type: lesson.lessontype ?? " ",
+                                duration: lesson.classDuration
+                                    .toString()
+                                    .substring(0, 2),
+                                numberOfClasses:
+                                    (lesson.numOfClasses ?? 0).ceil(),
+                                price:
+                                    lowPrice([
+                                      lesson.childClubHorseGroup!,
+                                      lesson.childClubHorsePrivate!,
+                                      lesson.childClubHorseSemiPrivate!,
+                                      lesson.childOwnHorseGroup!,
+                                      lesson.childOwnHorsePrivate!,
+                                      lesson.childOwnHorseSemiPrivate!,
+                        
+                                      lesson.adultClubHorseGroup!,
+                                      lesson.adultClubHorsePrivate!,
+                                      lesson.adultClubHorseSemiPrivate!,
+                                      lesson.adultOwnHorseGroup!,
+                                      lesson.adultOwnHorsePrivate!,
+                                      lesson.adultOwnHorseSemiPrivate!,
+                                    ]).ceil().toString(),
+                                lessonCurrency: lesson.lessonCurrency ?? "",
+                                imagePath: lesson.imageUrl!,
+                                discountText: "-200 AED Discount",
+                                availableDays: lesson.days ?? [],
+                                initialRating: lesson.clubRating ?? 0,
+                              ),
+                            );
+                          },
+                        ),
                       ),
             ),
           ],
@@ -239,9 +248,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   double lowPrice(List<double> listPrice) {
-    double lowPrice =  listPrice[0] ;
+    double lowPrice = listPrice[0];
     for (int i = 0; i < listPrice.length; i++) {
-      if ( lowPrice ==0 || listPrice[i] < lowPrice && listPrice[i] > 0) {
+      if (lowPrice == 0 || listPrice[i] < lowPrice && listPrice[i] > 0) {
         lowPrice = listPrice[i];
       }
     }
