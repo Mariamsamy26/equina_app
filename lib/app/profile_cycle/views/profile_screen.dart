@@ -1,3 +1,4 @@
+import 'package:equina_task/app/profile_cycle/widgets/custom_profile_item.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
@@ -45,128 +46,199 @@ class ProfileScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
-
-                      child: Icon(Icons.person, size: 17.dm, color: white),
-                    ),
-                    title: Text("profile"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
+                  CustomProfileItem(
+                    title: 'Edit Profile',
+                    imgPath: 'assets/images/edit_profile.png',
                   ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
-
-                      child: Icon(
-                        Icons.stars_outlined,
-                        size: 17.dm,
-                        color: white,
-                      ),
-                    ),
-                    title: Text("My Points"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
+                  CustomProfileItem(
+                    title: 'My Points',
+                    imgPath: 'assets/images/points.png',
                   ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
 
-                      child: Icon(
-                        Icons.notifications,
-                        size: 17.dm,
-                        color: white,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.h,
+                      horizontal: 10.w,
                     ),
-                    title: Text("My Notifications"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.w),
+                        SizedBox(
+                          width: 25.w,
+                          height: 23.h,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: mainPurble,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
 
-                      child: Icon(
-                        Icons.groups_2,
-                        size: 17.dm,
-                        color: white,
-                      ),
+                            child: Icon(Icons.notifications, color: white),
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "My Notifications",
+                          style: TextManager.regular(fontSize: 16),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(Icons.arrow_forward_ios_rounded),
+                        ),
+                        Icon(Icons.arrow_forward_ios, size: 13.dm),
+                        SizedBox(width: 10.w),
+                      ],
                     ),
-                    title: Text("Manage Family"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
                   ),
-                
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
 
-                      child: Icon(Icons.ac_unit_rounded, size: 17.dm, color: white),
-                    ),
-                    title: Text("Livery Settings"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
+                  CustomProfileItem(
+                    title: 'Manage Family',
+                    imgPath: 'assets/images/family.png',
                   ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
+                  CustomProfileItem(
+                    title: 'Livery Settings',
+                    imgPath: 'assets/images/book.png',
+                  ),
+                  CustomProfileItem(
+                    title: 'Fill Medical Report',
+                    imgPath: 'assets/images/medical_report.png',
+                  ),
+                  CustomProfileItem(
+                    title: 'Fill Club Application',
+                    imgPath: 'assets/images/clipboard.png',
+                  ),
+                  CustomProfileItem(
+                    title: 'Billing Details',
+                    imgPath: 'assets/images/bill.png',
+                  ),
+                  CustomProfileItem(
+                    title: 'Tutorial Guides',
+                    imgPath: 'assets/images/idea.png',
+                  ),
 
-                      child: Icon(
-                        Icons.stars_outlined,
-                        size: 17.dm,
-                        color: white,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.h,
+                      horizontal: 10.w,
                     ),
-                    title: Text("My Points"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.w),
+                        SizedBox(
+                          width: 25.w,
+                          height: 23.h,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: mainPurble,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
 
-                      child: Icon(
-                        Icons.notifications,
-                        size: 17.dm,
-                        color: white,
-                      ),
+                            child: Icon(Icons.info, color: white),
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Information",
+                          style: TextManager.regular(fontSize: 16),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(Icons.arrow_forward_ios_rounded),
+                        ),
+                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
+                        SizedBox(width: 10.w),
+                      ],
                     ),
-                    title: Text("My Notifications"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
                   ),
-                  ListTile(
-                    leading: Container(
-                      decoration: BoxDecoration(
-                        color: mainPurble,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
-                      ),
 
-                      child: Icon(
-                        Icons.groups_2,
-                        size: 17.dm,
-                        color: white,
-                      ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.h,
+                      horizontal: 10.w,
                     ),
-                    title: Text("Manage Family"),
-                    trailing: Icon(Icons.arrow_forward_ios, size: 15.dm),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.w),
+                        SizedBox(
+                          width: 25.w,
+                          height: 23.h,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: mainPurble,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
+
+                            child: Image.asset(
+                              "assets/images/contact-us.png",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Contact US",
+                          style: TextManager.regular(fontSize: 16),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(Icons.arrow_forward_ios_rounded),
+                        ),
+                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
+                        SizedBox(width: 10.w),
+                      ],
+                    ),
                   ),
-                
+
+                  Divider(color: greyBorder, indent: 20.w, endIndent: 20.w),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5.h,
+                      horizontal: 10.w,
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.w),
+                        SizedBox(
+                          width: 25.w,
+                          height: 23.h,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: mainPurble,
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.r),
+                              ),
+                            ),
+
+                            child: Image.asset(
+                              "assets/images/logout.png",
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Log Out",
+                          style: TextManager.regular(fontSize: 16),
+                        ),
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Icon(Icons.arrow_forward_ios_rounded),
+                        ),
+                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
+                        SizedBox(width: 10.w),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
