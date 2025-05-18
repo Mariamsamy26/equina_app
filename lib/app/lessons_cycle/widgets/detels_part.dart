@@ -1,0 +1,144 @@
+
+import 'package:equina_task/styles/colors.dart';
+import 'package:equina_task/styles/text_mang.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+class DetelsPart extends StatefulWidget {
+  final String clubName;
+  final String trainingTypes;
+  final String clubRating;
+  final String ratingFrom;
+  final String timeLesson;
+  final String clubDescription;
+
+
+  const DetelsPart({super.key,
+  required this.clubName,
+  required this.trainingTypes, 
+  required this.clubRating,
+   required this.ratingFrom,
+    required this.timeLesson, 
+    required this.clubDescription,
+  
+  });
+
+  @override
+  State<DetelsPart> createState() => _DetelsPartState();
+}
+
+class _DetelsPartState extends State<DetelsPart> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 5.h, bottom: 5.h, left: 20.w),
+
+      decoration: BoxDecoration(
+        color: white,
+        borderRadius: BorderRadius.all(Radius.circular(15.r)),
+        border: Border.all(color: greyBorder, width: 1.5.w),
+      ),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+               widget.clubName,
+                style: TextManager.regular(fontSize: 18).copyWith(
+                  color: mainPurble,
+                  decoration: TextDecoration.underline,
+                  decorationColor: mainPurble.withAlpha(200),
+                  decorationThickness: 2.h,
+                  decorationStyle: TextDecorationStyle.solid,
+                ),
+              ),
+              SizedBox(width: 10.w),
+              Image.asset("assets/images/info.png", height: 20.w, width: 20.h),
+            ],
+          ),
+          Text(
+            widget.trainingTypes,
+            style: TextManager.regular(fontSize: 18).copyWith(
+              color: black,
+              decoration: TextDecoration.none,
+            ),
+          ),
+
+          Row(
+            children: [
+              Icon(Icons.star, color: startclor),
+              Text(
+                " ${widget.clubRating} ( ${widget.ratingFrom} ) reviews",
+                style: TextManager.regular().copyWith(
+                  color: black,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+              SizedBox(width: 30.w),
+              Icon(Icons.access_time_sharp, color: mainPurble),
+              Text(
+                " ${widget.timeLesson} min",
+                style: TextManager.regular().copyWith(
+                  color: black,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 5.h),
+          Text(
+            "Type",
+            style: TextManager.regular(fontSize: 18).copyWith(
+              color: black,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(5),
+            margin: EdgeInsets.only(right: 5.w),
+            decoration: BoxDecoration(
+              color: backgroundGrey,
+              borderRadius: BorderRadius.all(Radius.circular(5.r)),
+            ),
+            child: Text(
+              maxLines: 3,
+              widget.trainingTypes,
+              style: TextManager.regular().copyWith(
+                color: lightGreyLabel,
+                decoration: TextDecoration.none,
+              ),
+            ),
+          ),
+
+          SizedBox(height: 5.h),
+          Text(
+            "Description",
+            style: TextManager.regular().copyWith(
+              color: black,
+              decoration: TextDecoration.none,
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+              color: backgroundGrey,
+              borderRadius: BorderRadius.all(Radius.circular(5.r)),
+            ),
+            child: Expanded(
+              child: Text(
+                widget.clubDescription,
+                style: TextManager.regular().copyWith(
+                  color: lightGreyLabel,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
