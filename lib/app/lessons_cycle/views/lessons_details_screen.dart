@@ -34,35 +34,36 @@ class _LessonsDetailsScreenState extends State<LessonsDetailsScreen> {
           ImgPart(imgPath: widget.lesson.imageUrl!),
           
           //body
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Column(
-                children: [
-                  OfferPart(),
-                  //screoll
-                  SizedBox(
-                    height: AppDimentions().availableheightWithAppBar * 0.42,
-                    child: ListView(
-                      padding: EdgeInsets.all(0),
-                      children: [
-                        DetelsPart(
-                          clubName: widget.lesson.categoryName!,
-                          trainingTypes: widget.lesson.trainingTypes!,
-                          clubRating: ( (widget.lesson.clubRating)!.ceil()).toString(),
-                          ratingFrom: ( (widget.lesson.rangeOfPricesFrom)).toString(),
-                          timeLesson: ( (widget.lesson.classDuration)!.ceil()).toString(),
-                          clubDescription: widget.lesson.clubDescription!,
-                        ),
-                        SizedBox(height: 5.h),
-                        StepsPart(),
-                      ],
-                    ),
-                  ),
-                ],
+      Expanded(
+         flex: 1,
+  child: Padding(
+    padding: EdgeInsets.symmetric(horizontal: 10.w),
+    child: Column(
+      children: [
+        OfferPart(),
+        // بدل SizedBox استعمل Expanded مع Container لتحديد الارتفاع
+        Container(
+          height: AppDimentions().availableheightWithAppBar * 0.42,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DetelsPart(
+                clubName: widget.lesson.categoryName!,
+                trainingTypes: widget.lesson.trainingTypes!,
+                clubRating: (widget.lesson.clubRating!.ceil()).toString(),
+                ratingFrom: (widget.lesson.rangeOfPricesFrom).toString(),
+                timeLesson: (widget.lesson.classDuration!.ceil()).toString(),
+                clubDescription: widget.lesson.clubDescription!,
               ),
-            ),
+              SizedBox(height: 5.h),
+              StepsPart(),
+            ],
           ),
+        ),
+      ],
+    ),
+  ),
+),
 
           //add cart buttom
           Container(
