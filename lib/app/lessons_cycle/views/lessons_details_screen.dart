@@ -23,80 +23,83 @@ class LessonsDetailsScreen extends StatefulWidget {
 class _LessonsDetailsScreenState extends State<LessonsDetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: backgroundGrey,
-      height: AppDimentions().availableheightWithAppBar,
-      width: AppDimentions().availableWidth,
+    return SafeArea(
+      child: Container(
+        color: backgroundGrey,
+        height: AppDimentions().availableheightWithAppBar,
+        width: AppDimentions().availableWidth,
+        
       
-
-      child: Column(
-        children: [
-          //img
-          ImgPart(imgPath: widget.lesson.imageUrl!),
-
-          //body
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Column(
-                children: [
-                  OfferPart(),
-                  SizedBox(
-                    height: AppDimentions().availableheightWithAppBar * 0.42,
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: [
-                        DetelsPart(
-                          clubName: widget.lesson.categoryName!,
-                          trainingTypes: widget.lesson.trainingTypes!,
-                          clubRating:
-                              (widget.lesson.clubRating!.ceil()).toString(),
-                          ratingFrom:
-                              (widget.lesson.rangeOfPricesFrom).toString(),
-                          timeLesson:
-                              (widget.lesson.classDuration!.ceil()).toString(),
-                          clubDescription: widget.lesson.clubDescription!,
-                        ),
-                        SizedBox(height: 5.h),
-                        StepsPart(),
-                      ],
+        child: Column(
+          children: [
+            //img
+            ImgPart(imgPath: widget.lesson.imageUrl!),
+      
+            //body
+            Expanded(
+              flex: 1,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10.w),
+                child: Column(
+                  children: [
+                    OfferPart(),
+                    SizedBox(
+                      height: AppDimentions().availableheightWithAppBar * 0.42,
+                      child: ListView(
+                        padding: EdgeInsets.zero,
+                        children: [
+                          DetelsPart(
+                            clubName: widget.lesson.categoryName!,
+                            trainingTypes: widget.lesson.trainingTypes!,
+                            clubRating:
+                                (widget.lesson.clubRating!.ceil()).toString(),
+                            ratingFrom:
+                                (widget.lesson.rangeOfPricesFrom).toString(),
+                            timeLesson:
+                                (widget.lesson.classDuration!.ceil()).toString(),
+                            clubDescription: widget.lesson.clubDescription!,
+                          ),
+                          SizedBox(height: 5.h),
+                          StepsPart(),
+                        ],
+                      ),
                     ),
+                  ],
+                ),
+              ),
+            ),
+      
+            //add cart buttom
+            Container(
+              height: AppDimentions().availableheightWithAppBar * 0.06,
+              width: AppDimentions().availableWidth ,
+              color: backgroundGrey,
+      
+              margin: EdgeInsets.symmetric(horizontal: 5.w),
+              padding: EdgeInsets.all(10),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: mainPurble,
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 1, color: mainPurble),
+                    borderRadius: BorderRadius.circular(8.r),
                   ),
-                ],
-              ),
-            ),
-          ),
-
-          //add cart buttom
-          Container(
-            height: AppDimentions().availableheightWithAppBar * 0.07,
-            width: AppDimentions().availableWidth * 0.90,
-            color: backgroundGrey,
-
-            margin: EdgeInsets.symmetric(horizontal: 5.w),
-            padding: EdgeInsets.all(10),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: mainPurble,
-                elevation: 0.0,
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 1, color: mainPurble),
-                  borderRadius: BorderRadius.circular(8.r),
                 ),
-              ),
-              onPressed: () {},
-              child: FittedBox(
-                fit: BoxFit.cover,
-                child: Text(
-                  "Add to Cart [ 55 ]",
-                  maxLines: 1,
-                  style: TextManager.medium().copyWith(color: white),
+                onPressed: () {},
+                child: FittedBox(
+                  
+                  fit: BoxFit.cover,
+                  child: Text(
+                    "Add to Cart [ 55 ]",
+                    maxLines: 1,
+                    style: TextManager.medium().copyWith(color: white),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

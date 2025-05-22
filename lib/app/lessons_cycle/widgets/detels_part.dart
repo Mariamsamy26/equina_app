@@ -11,21 +11,20 @@ class DetelsPart extends StatelessWidget {
   final String timeLesson;
   final String clubDescription;
 
-
-  const DetelsPart({super.key,
-  required this.clubName,
-  required this.trainingTypes, 
-  required this.clubRating,
-   required this.ratingFrom,
-    required this.timeLesson, 
+  const DetelsPart({
+    super.key,
+    required this.clubName,
+    required this.trainingTypes,
+    required this.clubRating,
+    required this.ratingFrom,
+    required this.timeLesson,
     required this.clubDescription,
-  
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 5.h, bottom: 5.h, left: 20.w),
+      padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 10.w),
 
       decoration: BoxDecoration(
         color: white,
@@ -39,7 +38,7 @@ class DetelsPart extends StatelessWidget {
           Row(
             children: [
               Text(
-               clubName,
+                clubName,
                 style: TextManager.regular(fontSize: 18).copyWith(
                   color: mainPurble,
                   decoration: TextDecoration.underline,
@@ -54,10 +53,9 @@ class DetelsPart extends StatelessWidget {
           ),
           Text(
             trainingTypes,
-            style: TextManager.regular(fontSize: 18).copyWith(
-              color: black,
-              decoration: TextDecoration.none,
-            ),
+            style: TextManager.regular(
+              fontSize: 18,
+            ).copyWith(color: black, decoration: TextDecoration.none),
           ),
 
           Row(
@@ -71,7 +69,7 @@ class DetelsPart extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 30.w),
-              Icon(Icons.access_time_sharp, color: mainPurble),
+              Icon(Icons.access_time_filled, color: mainPurble),
               Text(
                 " $timeLesson min",
                 style: TextManager.regular().copyWith(
@@ -85,17 +83,16 @@ class DetelsPart extends StatelessWidget {
           SizedBox(height: 5.h),
           Text(
             "Type",
-            style: TextManager.regular(fontSize: 18).copyWith(
-              color: black,
-              decoration: TextDecoration.none,
-            ),
+            style: TextManager.regular(
+              fontSize: 18,
+            ).copyWith(color: black, decoration: TextDecoration.none),
           ),
           Container(
-            padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(right: 50.w),
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
             decoration: BoxDecoration(
               color: backgroundGrey,
-              borderRadius: BorderRadius.all(Radius.circular(5.r)),
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
             ),
             child: Text(
               maxLines: 3,
@@ -116,19 +113,19 @@ class DetelsPart extends StatelessWidget {
             ),
           ),
           Container(
+            margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
             padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
               color: backgroundGrey,
-              borderRadius: BorderRadius.all(Radius.circular(5.r)),
+              borderRadius: BorderRadius.all(Radius.circular(10.r)),
             ),
-            child:Text(
-                clubDescription,
-                style: TextManager.regular().copyWith(
-                  color: lightGreyLabel,
-                  decoration: TextDecoration.none,
-                ),
+            child: Text(
+              clubDescription,
+              style: TextManager.regular().copyWith(
+                color: lightGreyLabel,
+                decoration: TextDecoration.none,
               ),
-          
+            ),
           ),
         ],
       ),

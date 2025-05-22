@@ -22,37 +22,35 @@ class CustomOptionSelect extends StatelessWidget {
 
     return GestureDetector(
       onTap: onPressed,
-      child: Container(
-        child: Row(
-          children: [
-            SizedBox(width: 5.w),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 5.w),
-              width: 15.w,
-              height: 20.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: selectColor, width: 1.w),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(1.w),
-                child: Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: radioColor,
-                  ),
+      child: Row(
+        children: [
+          Container(
+            margin: EdgeInsets.only(left: 15.w,right: 3.w,top: 0.h),
+            width: 15.w,
+            height: 20.h,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(color: selectColor, width: 1.w),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(1.w),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: radioColor,
                 ),
               ),
             ),
-            SizedBox(width: 5.w),
-            Text(
-              option,
-              style: TextManager.medium(
-                fontSize: 10,
-              ).copyWith(color: black, decoration: TextDecoration.none),
-            ),
-          ],
-        ),
+          ),
+
+          Text(
+            option,
+            style: TextManager.medium(
+              fontSize: 12,
+            ).copyWith(color: black, decoration: TextDecoration.none),
+          ),
+          
+        ],
       ),
     );
   }

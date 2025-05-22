@@ -3,6 +3,7 @@ import 'package:equina_task/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// ignore: must_be_immutable
 class ImgPart extends StatefulWidget {
   String imgPath;
   ImgPart({super.key, required this.imgPath});
@@ -17,7 +18,7 @@ class _ImgPartState extends State<ImgPart> {
     return Stack(
       children: [
         Container(
-          height: AppDimentions().availableheightWithAppBar * 0.3,
+          height: AppDimentions().availableheightWithAppBar * 0.25,
           width: 1.sw,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -76,8 +77,8 @@ class _ImgPartState extends State<ImgPart> {
               }
             },
             child: Container(
-              height: 45.h,
-              width: 45.w,
+              height: 35.h,
+              width: 40.w,
               decoration: BoxDecoration(
                 color: white,
                 borderRadius: BorderRadius.all(Radius.circular(10.r)),
