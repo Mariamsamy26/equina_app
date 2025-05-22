@@ -1,10 +1,9 @@
-
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DetelsPart extends StatefulWidget {
+class DetelsPart extends StatelessWidget {
   final String clubName;
   final String trainingTypes;
   final String clubRating;
@@ -24,11 +23,6 @@ class DetelsPart extends StatefulWidget {
   });
 
   @override
-  State<DetelsPart> createState() => _DetelsPartState();
-}
-
-class _DetelsPartState extends State<DetelsPart> {
-  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 5.h, bottom: 5.h, left: 20.w),
@@ -45,7 +39,7 @@ class _DetelsPartState extends State<DetelsPart> {
           Row(
             children: [
               Text(
-               widget.clubName,
+               clubName,
                 style: TextManager.regular(fontSize: 18).copyWith(
                   color: mainPurble,
                   decoration: TextDecoration.underline,
@@ -59,7 +53,7 @@ class _DetelsPartState extends State<DetelsPart> {
             ],
           ),
           Text(
-            widget.trainingTypes,
+            trainingTypes,
             style: TextManager.regular(fontSize: 18).copyWith(
               color: black,
               decoration: TextDecoration.none,
@@ -70,7 +64,7 @@ class _DetelsPartState extends State<DetelsPart> {
             children: [
               Icon(Icons.star, color: startclor),
               Text(
-                " ${widget.clubRating} ( ${widget.ratingFrom} ) reviews",
+                " $clubRating ( $ratingFrom ) reviews",
                 style: TextManager.regular().copyWith(
                   color: black,
                   decoration: TextDecoration.none,
@@ -79,7 +73,7 @@ class _DetelsPartState extends State<DetelsPart> {
               SizedBox(width: 30.w),
               Icon(Icons.access_time_sharp, color: mainPurble),
               Text(
-                " ${widget.timeLesson} min",
+                " $timeLesson min",
                 style: TextManager.regular().copyWith(
                   color: black,
                   decoration: TextDecoration.none,
@@ -98,14 +92,14 @@ class _DetelsPartState extends State<DetelsPart> {
           ),
           Container(
             padding: EdgeInsets.all(5),
-            margin: EdgeInsets.only(right: 5.w),
+            margin: EdgeInsets.only(right: 50.w),
             decoration: BoxDecoration(
               color: backgroundGrey,
               borderRadius: BorderRadius.all(Radius.circular(5.r)),
             ),
             child: Text(
               maxLines: 3,
-              widget.trainingTypes,
+              trainingTypes,
               style: TextManager.regular().copyWith(
                 color: lightGreyLabel,
                 decoration: TextDecoration.none,
@@ -127,15 +121,14 @@ class _DetelsPartState extends State<DetelsPart> {
               color: backgroundGrey,
               borderRadius: BorderRadius.all(Radius.circular(5.r)),
             ),
-            child: Expanded(
-              child: Text(
-                widget.clubDescription,
+            child:Text(
+                clubDescription,
                 style: TextManager.regular().copyWith(
                   color: lightGreyLabel,
                   decoration: TextDecoration.none,
                 ),
               ),
-            ),
+          
           ),
         ],
       ),

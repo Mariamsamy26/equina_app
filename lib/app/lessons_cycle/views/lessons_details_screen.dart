@@ -21,49 +21,52 @@ class LessonsDetailsScreen extends StatefulWidget {
 }
 
 class _LessonsDetailsScreenState extends State<LessonsDetailsScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
       color: backgroundGrey,
       height: AppDimentions().availableheightWithAppBar,
       width: AppDimentions().availableWidth,
+      
+
       child: Column(
         children: [
           //img
           ImgPart(imgPath: widget.lesson.imageUrl!),
-          
+
           //body
-      Expanded(
-         flex: 1,
-  child: Padding(
-    padding: EdgeInsets.symmetric(horizontal: 10.w),
-    child: Column(
-      children: [
-        OfferPart(),
-        // بدل SizedBox استعمل Expanded مع Container لتحديد الارتفاع
-        Container(
-          height: AppDimentions().availableheightWithAppBar * 0.42,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DetelsPart(
-                clubName: widget.lesson.categoryName!,
-                trainingTypes: widget.lesson.trainingTypes!,
-                clubRating: (widget.lesson.clubRating!.ceil()).toString(),
-                ratingFrom: (widget.lesson.rangeOfPricesFrom).toString(),
-                timeLesson: (widget.lesson.classDuration!.ceil()).toString(),
-                clubDescription: widget.lesson.clubDescription!,
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: Column(
+                children: [
+                  OfferPart(),
+                  SizedBox(
+                    height: AppDimentions().availableheightWithAppBar * 0.42,
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: [
+                        DetelsPart(
+                          clubName: widget.lesson.categoryName!,
+                          trainingTypes: widget.lesson.trainingTypes!,
+                          clubRating:
+                              (widget.lesson.clubRating!.ceil()).toString(),
+                          ratingFrom:
+                              (widget.lesson.rangeOfPricesFrom).toString(),
+                          timeLesson:
+                              (widget.lesson.classDuration!.ceil()).toString(),
+                          clubDescription: widget.lesson.clubDescription!,
+                        ),
+                        SizedBox(height: 5.h),
+                        StepsPart(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 5.h),
-              StepsPart(),
-            ],
+            ),
           ),
-        ),
-      ],
-    ),
-  ),
-),
 
           //add cart buttom
           Container(

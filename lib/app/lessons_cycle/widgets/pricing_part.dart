@@ -76,6 +76,7 @@ class _PricingPartState extends State<PricingPart> {
                 option: 'Child',
                 select: lessonFor == 'Child',
               ),
+              
             IconButton(
               onPressed: () {},
               icon: Icon(Icons.info_outline, color: mainBlue),
