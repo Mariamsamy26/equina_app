@@ -56,8 +56,8 @@ class MyApp extends StatelessWidget {
             
           ),
 
-           home:  const RootScreen(),
-          // home:  const SplashScreen(),
+          //  home:  const RootScreen(),
+          home:  const SplashScreen(),
         );
       },
     );

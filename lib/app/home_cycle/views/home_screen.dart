@@ -34,9 +34,8 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    // OuthApis().userId
-
-    context.read<LessonsProvider>().getAllLessons(55);
+    context.read<LessonsProvider>().getAllLessons(OuthApis.userId);
+     print("Loaded user ID log in: ${OuthApis.userId}");
   }
 
   @override
@@ -188,7 +187,6 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
             ),
-
             Expanded(
               child:
                   lessons == null
@@ -198,44 +196,38 @@ class _HomeScreenState extends State<HomeScreen>
                           itemCount: lessons.length,
                           itemBuilder: (context, index) {
                             final lesson = lessons[index];
-                            return GestureDetector(
-                              onTap:
-                                  () => Navigation().goToScreen(
-                                    context,
-                                    (C) => LessonsDetailsScreen(lesson: lesson),
-                                  ),
-                              child: AssessmentTinaCard(
-                                title: lesson.trainingTypes ?? " ",
-                                clubName: lesson.categoryName ?? " ",
-                                description: lesson.description!,
-                                type: lesson.lessontype ?? " ",
-                                duration: lesson.classDuration
-                                    .toString()
-                                    .substring(0, 2),
-                                numberOfClasses:
-                                    (lesson.numOfClasses ?? 0).ceil(),
-                                price:
-                                    lowPrice([
-                                      lesson.childClubHorseGroup!,
-                                      lesson.childClubHorsePrivate!,
-                                      lesson.childClubHorseSemiPrivate!,
-                                      lesson.childOwnHorseGroup!,
-                                      lesson.childOwnHorsePrivate!,
-                                      lesson.childOwnHorseSemiPrivate!,
-                        
-                                      lesson.adultClubHorseGroup!,
-                                      lesson.adultClubHorsePrivate!,
-                                      lesson.adultClubHorseSemiPrivate!,
-                                      lesson.adultOwnHorseGroup!,
-                                      lesson.adultOwnHorsePrivate!,
-                                      lesson.adultOwnHorseSemiPrivate!,
-                                    ]).ceil().toString(),
-                                lessonCurrency: lesson.lessonCurrency ?? "",
-                                imagePath: lesson.imageUrl!,
-                                discountText: "-200 AED Discount",
-                                availableDays: lesson.days ?? [],
-                                initialRating: lesson.clubRating ?? 0,
-                              ),
+                            return AssessmentTinaCard(
+                              lesson: lesson,
+                              title: lesson.trainingTypes ?? " ",
+                              clubName: lesson.categoryName ?? " ",
+                              description: lesson.description!,
+                              type: lesson.lessontype ?? " ",
+                              duration: lesson.classDuration
+                                  .toString()
+                                  .substring(0, 2),
+                              numberOfClasses:
+                                  (lesson.numOfClasses ?? 0).ceil(),
+                              price:
+                                  lowPrice([
+                                    lesson.childClubHorseGroup!,
+                                    lesson.childClubHorsePrivate!,
+                                    lesson.childClubHorseSemiPrivate!,
+                                    lesson.childOwnHorseGroup!,
+                                    lesson.childOwnHorsePrivate!,
+                                    lesson.childOwnHorseSemiPrivate!,
+                                                    
+                                    lesson.adultClubHorseGroup!,
+                                    lesson.adultClubHorsePrivate!,
+                                    lesson.adultClubHorseSemiPrivate!,
+                                    lesson.adultOwnHorseGroup!,
+                                    lesson.adultOwnHorsePrivate!,
+                                    lesson.adultOwnHorseSemiPrivate!,
+                                  ]).ceil().toString(),
+                              lessonCurrency: lesson.lessonCurrency ?? "",
+                              imagePath: lesson.imageUrl!,
+                              discountText: "-200 AED Discount",
+                              availableDays: lesson.days ?? [],
+                              initialRating: lesson.clubRating ?? 0,
                             );
                           },
                         ),

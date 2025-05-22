@@ -1,5 +1,8 @@
 import 'package:equina_task/app/profile_cycle/widgets/custom_profile_item.dart';
+import 'package:equina_task/app/start_app_cycle/services/outh_apis.dart';
+import 'package:equina_task/app/start_app_cycle/views/auth_screen.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
+import 'package:equina_task/helpers/navigation_helper.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
@@ -56,9 +59,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5.h,
-                      horizontal: 10.w,
+                    padding: EdgeInsets.only(
+                      top: 5.h,
+                      bottom: 5.h,
+                      left: 10.w,
+                      right: 15.w,
                     ),
                     child: Row(
                       children: [
@@ -83,12 +88,7 @@ class ProfileScreen extends StatelessWidget {
                           style: TextManager.regular(fontSize: 16),
                         ),
                         Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(Icons.arrow_forward_ios_rounded),
-                        ),
-                        Icon(Icons.arrow_forward_ios, size: 13.dm),
-                        SizedBox(width: 10.w),
+                        Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
                   ),
@@ -119,9 +119,11 @@ class ProfileScreen extends StatelessWidget {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5.h,
-                      horizontal: 10.w,
+                    padding: EdgeInsets.only(
+                      top: 5.h,
+                      bottom: 5.h,
+                      left: 10.w,
+                      right: 15.w,
                     ),
                     child: Row(
                       children: [
@@ -146,20 +148,17 @@ class ProfileScreen extends StatelessWidget {
                           style: TextManager.regular(fontSize: 16),
                         ),
                         Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(Icons.arrow_forward_ios_rounded),
-                        ),
-                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
-                        SizedBox(width: 10.w),
+                        Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
                   ),
 
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5.h,
-                      horizontal: 10.w,
+                    padding: EdgeInsets.only(
+                      top: 5.h,
+                      bottom: 5.h,
+                      left: 10.w,
+                      right: 15.w,
                     ),
                     child: Row(
                       children: [
@@ -187,56 +186,59 @@ class ProfileScreen extends StatelessWidget {
                           style: TextManager.regular(fontSize: 16),
                         ),
                         Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(Icons.arrow_forward_ios_rounded),
-                        ),
-                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
-                        SizedBox(width: 10.w),
+                        Icon(Icons.arrow_forward_ios_rounded),
                       ],
                     ),
                   ),
 
                   Divider(color: greyBorder, indent: 20.w, endIndent: 20.w),
 
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 5.h,
-                      horizontal: 10.w,
-                    ),
-                    child: Row(
-                      children: [
-                        SizedBox(width: 5.w),
-                        SizedBox(
-                          width: 25.w,
-                          height: 23.h,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: mainPurble,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5.r),
+                  InkWell(
+                    onTap: () async {
+                      await OuthApis.deleteUserId(); 
+                      Navigation().goToScreenAndClearAll(
+                        context,
+                        (c) => AuthScreen(),
+                      );
+
+                      print("Loaded user ID log out: ${OuthApis.userId}");
+                    },
+
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 5.h,
+                        bottom: 5.h,
+                        left: 10.w,
+                        right: 15.w,
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5.w),
+                          SizedBox(
+                            width: 25.w,
+                            height: 23.h,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: mainPurble,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5.r),
+                                ),
+                              ),
+                              child: Image.asset(
+                                "assets/images/logout.png",
+                                fit: BoxFit.fill,
                               ),
                             ),
-
-                            child: Image.asset(
-                              "assets/images/logout.png",
-                              fit: BoxFit.fill,
-                            ),
                           ),
-                        ),
-                        SizedBox(width: 10.w),
-                        Text(
-                          "Log Out",
-                          style: TextManager.regular(fontSize: 16),
-                        ),
-                        Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(Icons.arrow_forward_ios_rounded),
-                        ),
-                        // Icon(Icons.arrow_forward_ios, size: 13.dm),
-                        SizedBox(width: 10.w),
-                      ],
+                          SizedBox(width: 10.w),
+                          Text(
+                            "Log Out",
+                            style: TextManager.regular(fontSize: 16),
+                          ),
+                          Spacer(),
+                          Icon(Icons.arrow_forward_ios_rounded),
+                        ],
+                      ),
                     ),
                   ),
                 ],

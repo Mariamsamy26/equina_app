@@ -87,6 +87,8 @@ class _ImgPartState extends State<ImgPart> {
             ),
           ),
         ),
+     
+     
       ],
     );
   }
