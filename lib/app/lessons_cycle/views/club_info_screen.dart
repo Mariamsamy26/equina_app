@@ -88,13 +88,15 @@ class ClubInfoScreen extends StatelessWidget {
                 ),
               ],
             ),
+           
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 lesson.clubDescription ?? " ",
-                style: TextManager.regular(),
+                style: TextManager.medium(fontSize: 18),
               ),
             ),
+
           ],
         ),
       ),
