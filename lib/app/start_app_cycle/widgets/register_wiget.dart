@@ -9,28 +9,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../helpers/navigation_helper.dart';
-import '../widgets/dialog_otp.dart';
+import 'dialog_otp.dart';
 
-class RegisterForm extends StatefulWidget {
-  const RegisterForm({super.key});
+class RegisterWiget extends StatefulWidget {
+  const RegisterWiget({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _RegisterFormState createState() => _RegisterFormState();
+  _RegisterWigetState createState() => _RegisterWigetState();
 }
 
-class _RegisterFormState extends State<RegisterForm> {
+class _RegisterWigetState extends State<RegisterWiget> {
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController(text: "+2");
-  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController(text: "+2");
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
   bool _isChecked = false;
+
   bool _isPasswordVisible = false;
+
   String numberVerif = "";
   late bool onVerif;
   int outhState = -1;
+
 
   @override
   void dispose() {
@@ -46,7 +51,7 @@ class _RegisterFormState extends State<RegisterForm> {
     return Container(
       color: backgroundGrey,
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: ListView(
+      child: Column(
         children: [
           Form(
             key: formKey,
@@ -159,7 +164,7 @@ class _RegisterFormState extends State<RegisterForm> {
 
                     SizedBox(width: 3.h),
 
-                    ///mmm
+                    //TODO
                     if (_phoneController.text.length == 11 && outhState == 1)
                       Expanded(
                         flex: 3,

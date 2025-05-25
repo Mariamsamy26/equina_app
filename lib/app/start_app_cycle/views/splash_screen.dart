@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:equina_task/app/home_cycle/views/home_screen.dart';
-import 'package:equina_task/app/start_app_cycle/services/outh_apis.dart';
+import 'package:equina_task/app/home_cycle/views/root_screen.dart';
 import 'package:equina_task/app/start_app_cycle/views/onbording_screen.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/helpers/navigation_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "Sprash screen";
@@ -24,16 +24,15 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _initialize() async {
-    await OuthApis.loadUserId(); 
-    print("Loaded user ID: ${OuthApis.userId}");
+    final prefs = await SharedPreferences.getInstance();
+    int? userId = prefs.getInt('user_id');
+
+    print("Loaded user ID: ${userId}");
 
     Future.delayed(Duration(milliseconds: 1500), () {
       Navigation().goToScreenAndClearAll(
         context,
-        (context) =>
-            OuthApis.userId != -1
-                ? HomeScreen() 
-                : OnbordingScreen(), 
+        (context) => userId != null ? RootScreen() : OnbordingScreen(),
       );
     });
   }

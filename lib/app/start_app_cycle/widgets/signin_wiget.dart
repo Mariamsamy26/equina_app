@@ -16,22 +16,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SignInForm extends StatefulWidget {
-  const SignInForm({super.key});
+class SignInWiget extends StatefulWidget {
+  const SignInWiget({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _SignInFormState createState() => _SignInFormState();
+  _SignInWigetState createState() => _SignInWigetState();
 }
 
-class _SignInFormState extends State<SignInForm> {
+class _SignInWigetState extends State<SignInWiget> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
   final bool _isPasswordVisible = true;
   String userType = "Equestrian User";
+
   late LogIn acc;
 
   @override
@@ -195,10 +197,10 @@ class _SignInFormState extends State<SignInForm> {
                 if (userType == "Equestrian User" &&
                     _phoneController.text.isNotEmpty &&
                     _passwordController.text.isNotEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (context) => LodingGif(),
-                  );
+               
+
+                      Navigation().showLoadingGifDialog(context);
+
                   acc =
                       (await OuthApis().logIn(
                         phone: "+2${_phoneController.text}",
@@ -215,7 +217,7 @@ class _SignInFormState extends State<SignInForm> {
                     
                   }
 
-                  if (acc.status == 0) {
+                 else {
                     Navigation().closeDialog(context);
                     showDialog(
                       context: context,

@@ -1,8 +1,6 @@
-import 'package:equina_task/app/home_cycle/widgets/leson_item_card.dart';
+import 'package:equina_task/app/home_cycle/widgets/lesson_item_widgit.dart';
 import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
-import 'package:equina_task/app/lessons_cycle/views/lessons_details_screen.dart';
 import 'package:equina_task/app/profile_cycle/views/profile_screen.dart';
-import 'package:equina_task/app/start_app_cycle/services/outh_apis.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/helpers/navigation_helper.dart';
 import 'package:equina_task/styles/colors.dart';
@@ -12,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   // ignore: use_super_parameters
@@ -25,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
 
+  bool dataLoaded = false;
+
   @override
   void dispose() {
     _searchController.dispose();
@@ -34,8 +35,22 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     super.initState();
-    context.read<LessonsProvider>().getAllLessons(OuthApis.userId);
-     print("Loaded user ID log in: ${OuthApis.userId}");
+    _initializeData();
+  }
+
+  Future<void> _initializeData() async {
+    int? id = await getUserId();
+    await context.read<LessonsProvider>().getAllLessons(id!);
+    dataLoaded = true;
+    setState(() {});
+  }
+
+ 
+
+  Future<int?> getUserId ()async{
+    final prefs = await SharedPreferences.getInstance();
+    int? userId = prefs.getInt('user_id');
+    return userId;
   }
 
   @override
@@ -189,19 +204,19 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Expanded(
               child:
-                  lessons == null
-                      ? const Center(child: LodingGif())
+                  dataLoaded == false
+                      ? const Center(child: LodingGifDialog())
                       : SlidableAutoCloseBehavior(
                         child: ListView.builder(
-                          itemCount: lessons.length,
+                          itemCount: lessons!.length,
                           itemBuilder: (context, index) {
                             final lesson = lessons[index];
-                            return AssessmentTinaCard(
+                            return lessonItemWidgit(
                               lesson: lesson,
-                              title: lesson.trainingTypes ?? " ",
-                              clubName: lesson.categoryName ?? " ",
+                              title: lesson.trainingTypes!,
+                              clubName: lesson.categoryName!,
                               description: lesson.description!,
-                              type: lesson.lessontype ?? " ",
+                              type: lesson.lessontype!,
                               duration: lesson.classDuration
                                   .toString()
                                   .substring(0, 2),
@@ -215,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     lesson.childOwnHorseGroup!,
                                     lesson.childOwnHorsePrivate!,
                                     lesson.childOwnHorseSemiPrivate!,
-                                                    
+
                                     lesson.adultClubHorseGroup!,
                                     lesson.adultClubHorsePrivate!,
                                     lesson.adultClubHorseSemiPrivate!,
@@ -241,6 +256,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   double lowPrice(List<double> listPrice) {
     double lowPrice = listPrice[0];
+
     for (int i = 0; i < listPrice.length; i++) {
       if (lowPrice == 0 || listPrice[i] < lowPrice && listPrice[i] > 0) {
         lowPrice = listPrice[i];

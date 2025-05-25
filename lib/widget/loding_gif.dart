@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
-class LodingGif extends StatelessWidget {
-  const LodingGif({super.key});
+class LodingGifDialog extends StatelessWidget {
+  const LodingGifDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

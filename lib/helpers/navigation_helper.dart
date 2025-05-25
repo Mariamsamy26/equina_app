@@ -1,3 +1,4 @@
+import 'package:equina_task/widget/loding_gif.dart';
 import 'package:flutter/material.dart';
 
 class Navigation {
@@ -39,13 +40,13 @@ class Navigation {
         .then(futureOr);
   }
 
-  // void showLoadingGifDialog(BuildContext context) {
-  //   showDialog(
-  //       barrierColor: Colors.white.withOpacity(0.05),
-  //       barrierDismissible: false,
-  //       context: context,
-  //       builder: (context) => const LoadingGifDialog());
-  // }
+  void showLoadingGifDialog(BuildContext context) {
+    showDialog(
+        barrierColor: Colors.white.withOpacity(0.05),
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => const LodingGifDialog());
+  }
 
   void showLoadingTextDialog(BuildContext context, AlertDialog Dialog) {
     showDialog(barrierDismissible: false, context: context, builder: (context) => Dialog);

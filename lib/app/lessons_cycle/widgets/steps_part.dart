@@ -1,12 +1,18 @@
-import 'package:equina_task/app/lessons_cycle/widgets/Stap_one_part.dart';
+import 'package:equina_task/app/lessons_cycle/models/lessons_list.dart';
+import 'package:equina_task/app/lessons_cycle/models/public_lesson_details.dart';
+import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
+import 'package:equina_task/app/lessons_cycle/widgets/price_stap_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/Stap_two_part.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class StepsPart extends StatefulWidget {
-  const StepsPart({super.key});
+  final Lesson lesson;
+
+  const StepsPart( {super.key, required this.lesson});
 
   @override
   State<StepsPart> createState() => _StepsPartState();
@@ -15,6 +21,21 @@ class StepsPart extends StatefulWidget {
 class _StepsPartState extends State<StepsPart> {
   int stapNum = 1;
   String get stapprov => stapNum == 1 ? "Next >" : "< Prev";
+
+   @override
+  void initState() {
+    super.initState();
+    _loadLessonDetails();
+  }
+
+  void _loadLessonDetails() async {
+    //todo id
+    await context.read<LessonsProvider>().getPublicLessonDetails(
+      lessonId: 50,
+      contactId: 55,
+    );
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -75,7 +96,7 @@ class _StepsPartState extends State<StepsPart> {
             color: greyBorder,
           ),
 
-          stapNum == 1 ? StapOnePart() : StapTwoPart(),
+          stapNum == 1 ? PriceStapPart(lessonid: widget.lesson.id!,) : StapTwoPart(),
         ],
       ),
     );

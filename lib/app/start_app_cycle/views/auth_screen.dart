@@ -1,5 +1,5 @@
-import 'package:equina_task/app/start_app_cycle/views/register_form.dart';
-import 'package:equina_task/app/start_app_cycle/views/signin_form.dart';
+import 'package:equina_task/app/start_app_cycle/widgets/register_wiget.dart';
+import 'package:equina_task/app/start_app_cycle/widgets/signin_wiget.dart';
 import 'package:equina_task/app/start_app_cycle/widgets/custom_tab_view.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/styles/colors.dart';
@@ -16,47 +16,52 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: white,
-        child: Column(
-          children: [
-            Center(
-              child: Column(
-                children: [
-                  SizedBox(height: 35.h),
-                  Image.asset(
-                    "assets/images/logo_text.png",
-                    height: 50.h,
-                    width: AppDimentions().availableWidth * 0.6,
-                    fit: BoxFit.fill,
-                  ),
-                  SizedBox(height: 10.h),
-                  Text(
-                    "Welcon to equina ",
-                    style: TextManager.medium(fontSize: 22),
-                  ),
-                  Text(
-                    "equinaCLUB, book your ",
-                    style: TextManager.regular(
-                      fontSize: 20,
-                    ).copyWith(color: lightGreyLabel),
-                  ),
-                  Text(
-                    "classes - advance your game. ",
-                    style: TextManager.regular(
-                      fontSize: 20,
-                    ).copyWith(color: lightGreyLabel),
-                  ),
-                  SizedBox(height: 10.h),
-                ],
+      body: SingleChildScrollView(
+        child: Container(
+          color: white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    SizedBox(height: 35.h),
+                    Image.asset(
+                      "assets/images/logo_text.png",
+                      height: 50.h,
+                      width: AppDimentions().availableWidth * 0.6,
+                      fit: BoxFit.fill,
+                    ),
+                    SizedBox(height: 10.h),
+                    Text(
+                      "Welcon to equina ",
+                      style: TextManager.medium(fontSize: 22),
+                    ),
+                    Text(
+                      "equinaCLUB, book your ",
+                      style: TextManager.regular(
+                        fontSize: 20,
+                      ).copyWith(color: lightGreyLabel),
+                    ),
+                    Text(
+                      "classes - advance your game. ",
+                      style: TextManager.regular(
+                        fontSize: 20,
+                      ).copyWith(color: lightGreyLabel),
+                    ),
+                    SizedBox(height: 10.h),
+                  ],
+                ),
               ),
-            ),
-            CustomTabView(
-              tabs: ["Sign In", "Register"],
-              views: [SignInForm(), RegisterForm()],
-              initialTabIndex: initialTabIndex,
-            ),
-          ],
+              CustomTabView(
+                tabs: ["Sign In", "Register"],
+                views: [SignInWiget(), RegisterWiget()],
+                initialTabIndex: initialTabIndex,
+              ),
+            ],
+          ),
         ),
       ),
     );

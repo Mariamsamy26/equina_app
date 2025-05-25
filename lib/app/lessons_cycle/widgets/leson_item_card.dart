@@ -1,3 +1,4 @@
+import 'package:equina_task/app/lessons_cycle/models/lessons_list.dart';
 import 'package:equina_task/helpers/application_dimentions.dart'
     show AppDimentions;
 import 'package:equina_task/styles/colors.dart';
@@ -31,7 +32,7 @@ class AssessmentTinaCard extends StatelessWidget {
     required this.imagePath,
     required this.availableDays,
     required this.initialRating,
-    this.discountText,
+    this.discountText, required Lesson lesson,
   }) : super(key: key);
 
   @override

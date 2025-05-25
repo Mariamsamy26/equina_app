@@ -23,13 +23,6 @@ class _RootScreenState extends State<RootScreen> {
           TabItem(icon: Icons.calendar_month, title: 'Calendwe'),
           TabItem(icon: Icons.map, title: 'Maps'),
           TabItem(icon: IconData(0xe800, fontFamily: "HelmetIcon", fontPackage: null), title: 'livery'),
-          
-          
-          // TabItem(
-          //   icon: Image.asset("assets/images/jumping_experience.png",
-          //   color: black,),
-          //   title: 'livery',
-          // ),
           TabItem(icon: Icons.shopping_cart, title: 'Cart'),
         ],
         color: black,
@@ -45,8 +38,8 @@ class _RootScreenState extends State<RootScreen> {
 }
 
 List<Widget> tabs = [
-  HomeScreen(key: UniqueKey()),
-  Center(child: Text('Calendwe')),
+  HomeScreen(),
+  Center(child: Text('Calender')),
   Center(child: Text('Maps')),
   Center(child: Text('livery')),
   Center(child: Text('Cart')),

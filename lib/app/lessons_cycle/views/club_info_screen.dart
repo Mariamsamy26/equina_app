@@ -1,4 +1,5 @@
-import 'package:equina_task/app/lessons_cycle/models/lessons_list';
+import 'package:equina_task/app/lessons_cycle/models/lessons_list.dart';
+import 'package:equina_task/app/start_app_cycle/widgets/custom_tab_view.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
@@ -68,19 +69,19 @@ class ClubInfoScreen extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                        top: 215,
+                        top: 220,
                         left: 115,
                         child: Text(
                           lesson.categoryName ?? " ",
-                          style: TextManager.regular(fontSize: 20),
+                          style: TextManager.medium(fontSize: 18),
                         ),
                       ),
                       Positioned(
                         top: 215,
-                        right: 10,
+                        right: 0,
                         child: IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.more_vert_outlined),
+                          icon: Icon(Icons.more_vert_outlined, size: 22.dm),
                         ),
                       ),
                     ],
@@ -88,15 +89,41 @@ class ClubInfoScreen extends StatelessWidget {
                 ),
               ],
             ),
-           
-            Padding(
+
+            Container(
+               color: fixErorr,
+                    height:AppDimentions().availableheightNoAppBar*0.6,
+
+                    
               padding: const EdgeInsets.all(10.0),
               child: Text(
                 lesson.clubDescription ?? " ",
-                style: TextManager.medium(fontSize: 18),
+                style: TextManager.regular(),
               ),
             ),
 
+            DefaultTabController(
+              length: 2,
+              child: Column(
+                children: [
+                  TabBar(
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    labelColor: black,
+                    indicatorColor: mainBlue,
+                    tabs: [
+                      Tab(text: "Details"),
+                      Tab(text: "Most Common Facilities"),
+                    ],
+                  ),
+                  Container(
+                    color: fixErorr,
+                    height:AppDimentions().availableheightNoAppBar*0.6,
+                   child: TabBarView(children: [
+
+                   ])),
+                ],
+              ),
+            ),
           ],
         ),
       ),

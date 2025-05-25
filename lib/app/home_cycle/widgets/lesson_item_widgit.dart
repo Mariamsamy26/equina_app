@@ -1,8 +1,10 @@
-import 'package:equina_task/app/lessons_cycle/models/lessons_list';
+
+import 'package:equina_task/app/lessons_cycle/models/lessons_list.dart';
 import 'package:equina_task/app/lessons_cycle/views/club_info_screen.dart';
-import 'package:equina_task/app/lessons_cycle/views/lessons_details_screen.dart';
+import 'package:equina_task/app/lessons_cycle/views/lessons_Course_details_screen.dart';
 import 'package:equina_task/helpers/application_dimentions.dart'
     show AppDimentions;
+
 import 'package:equina_task/helpers/navigation_helper.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart' show TextManager;
@@ -11,7 +13,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class AssessmentTinaCard extends StatelessWidget {
+class lessonItemWidgit extends StatelessWidget {
   final String title;
   final String clubName;
   final String? description;
@@ -26,7 +28,7 @@ class AssessmentTinaCard extends StatelessWidget {
   final double initialRating;
   final Lesson lesson;
 
-  const AssessmentTinaCard({
+  const lessonItemWidgit({
     Key? key,
     required this.title,
     required this.clubName,
@@ -90,7 +92,7 @@ class AssessmentTinaCard extends StatelessWidget {
         onTap:
             () => Navigation().goToScreen(
               context,
-              (C) => LessonsDetailsScreen(lesson: lesson),
+              (C) => LessonsCourseDetailsScreen(lesson: lesson),
             ),
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),

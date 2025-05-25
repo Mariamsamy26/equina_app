@@ -7,6 +7,7 @@ import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -195,13 +196,15 @@ class ProfileScreen extends StatelessWidget {
 
                   InkWell(
                     onTap: () async {
-                      await OuthApis.deleteUserId(); 
+                      final pref = await SharedPreferences.getInstance();
+                      await pref.clear();
+
                       Navigation().goToScreenAndClearAll(
                         context,
                         (c) => AuthScreen(),
                       );
 
-                      print("Loaded user ID log out: ${OuthApis.userId}");
+                     
                     },
 
                     child: Padding(
