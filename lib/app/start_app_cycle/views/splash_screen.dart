@@ -4,6 +4,7 @@ import 'package:equina_task/app/home_cycle/views/root_screen.dart';
 import 'package:equina_task/app/start_app_cycle/views/onbording_screen.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/helpers/navigation_helper.dart';
+import 'package:equina_task/main.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,8 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void _initialize() async {
-    final prefs = await SharedPreferences.getInstance();
-    int? userId = prefs.getInt('user_id');
+     int? userId = await MyApp().userIdFuture;
 
     print("Loaded user ID: ${userId}");
 

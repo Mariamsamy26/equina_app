@@ -6,6 +6,7 @@ import 'package:equina_task/app/lessons_cycle/widgets/offer_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/price_stap_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/steps_part.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
+import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
@@ -33,16 +34,12 @@ class _LessonsDetailsScreenState extends State<LessonsCourseDetailsScreen> {
   }
 
   Future<void> _initializeData() async {
-    final prefs = await SharedPreferences.getInstance();
-    int? userId = prefs.getInt('user_id');
+    int? userId = await MyApp().userIdFuture;
      
-   //todo id
     await context.read<LessonsProvider>().getPublicLessonDetails(
-      lessonId: 50,
-      contactId: 55,
+      lessonId: widget.lesson.id!,
+      contactId: userId!,
     );
-    
-    await context.read<LessonsProvider>().getSelectedPrice();
 
   }
 
@@ -120,7 +117,7 @@ class _LessonsDetailsScreenState extends State<LessonsCourseDetailsScreen> {
                 child: FittedBox(
                   fit: BoxFit.cover,
                   child: Text(
-                     "Add to Cart [${price?.toStringAsFixed(0) ?? '0'} EGP] ",
+                     "Add to Cart [ ${price?.toStringAsFixed(0)} EGP ] ",
                     maxLines: 1,
                     style: TextManager.medium().copyWith(color: white),
                   ),

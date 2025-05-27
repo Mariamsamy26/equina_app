@@ -3,6 +3,7 @@ import 'package:equina_task/app/lessons_cycle/models/public_lesson_details.dart'
 import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/price_stap_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/Stap_two_part.dart';
+import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +30,10 @@ class _StepsPartState extends State<StepsPart> {
   }
 
   void _loadLessonDetails() async {
-    //todo id
+    int? userId = await MyApp().userIdFuture;
     await context.read<LessonsProvider>().getPublicLessonDetails(
-      lessonId: 50,
-      contactId: 55,
+      lessonId: widget.lesson.id!,
+      contactId: userId!,
     );
   }
   

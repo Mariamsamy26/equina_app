@@ -1,11 +1,13 @@
 import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/custom_option_select.dart';
+import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class PriceStapPart extends StatefulWidget {
   int lessonid;
 
@@ -28,11 +30,13 @@ class _PriceStapPartState extends State<PriceStapPart> {
   }
 
   void _loadLessonDetails() async {
-    //todo id
+    int? userId = await MyApp().userIdFuture;
     await context.read<LessonsProvider>().getPublicLessonDetails(
-      lessonId: 50,
-      contactId: 55,
+      lessonId: widget.lessonid,
+      contactId: userId!,
     );
+    print("lessonDetailsId: ${widget.lessonid},");
+    print("userDetailsId: ${userId},");
   }
 
   @override
@@ -40,14 +44,11 @@ class _PriceStapPartState extends State<PriceStapPart> {
     final lessonDetailsProviderWatch =
         context.watch<LessonsProvider>().publicLessonDetails;
 
-
-//     final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
-//         WidgetsBinding.instance.addPostFrameCallback((_) {
-//   context.read<LessonsProvider>(). context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");("$lessonFor$horse$lessonType");
-// });
-  //  final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
- 
-
+    //     final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
+    //         WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<LessonsProvider>(). context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");("$lessonFor$horse$lessonType");
+    // });
+    //  final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,8 +96,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   lessonFor = 'adult';
                 });
-                context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
-             
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
               },
               option: 'Adult',
               select: lessonFor == 'adult',
@@ -107,7 +109,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   lessonFor = 'child';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
               },
               option: 'Child',
               select: lessonFor == 'child',
@@ -156,7 +160,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   horse = 'ClubHorse';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
               },
               option: 'Club',
               select: horse == 'ClubHorse',
@@ -167,7 +173,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   horse = 'OwnHorse';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
               },
               option: 'Own',
               select: horse == 'OwnHorse',
@@ -221,7 +229,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                         setState(() {
                           lessonType = 'Private';
                         });
-                         context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                        context.read<LessonsProvider>().updateSelectedPriceFor(
+                          "$lessonFor$horse$lessonType",
+                        );
                       }
                       : null,
               child: Row(
@@ -238,7 +248,7 @@ class _PriceStapPartState extends State<PriceStapPart> {
                                             .lessonDetails
                                             ?.privateActive ==
                                         "True" &&
-                                    lessonType == 'private')
+                                    lessonType == 'Private')
                                 ? mainBlue
                                 : black.withAlpha(100),
                         width: 1.w,
@@ -251,11 +261,12 @@ class _PriceStapPartState extends State<PriceStapPart> {
                           shape: BoxShape.circle,
                           color:
                               (lessonDetailsProviderWatch
-                                              .lessonDetails
-                                              ?.privateActive ==
-                                          "True" &&
-                                      lessonType == 'private')
-                                  ? mainBlue
+                                          .lessonDetails
+                                          ?.privateActive ==
+                                      "True")
+                                  ? (lessonType == 'Private'
+                                      ? mainBlue
+                                      : lightGreyFilter)
                                   : black.withAlpha(100),
                         ),
                       ),
@@ -280,7 +291,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                         setState(() {
                           lessonType = 'SemiPrivate';
                         });
-                         context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                        context.read<LessonsProvider>().updateSelectedPriceFor(
+                          "$lessonFor$horse$lessonType",
+                        );
                       }
                       : null,
               child: Row(
@@ -308,14 +321,16 @@ class _PriceStapPartState extends State<PriceStapPart> {
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
+
                           color:
                               (lessonDetailsProviderWatch
-                                              .lessonDetails
-                                              ?.semiPrivateActive ==
-                                          "True" &&
-                                      lessonType == 'SemiPrivate')
-                                  ? mainBlue
-                                  : lightGreyFilter,
+                                          .lessonDetails
+                                          ?.semiPrivateActive ==
+                                      "True")
+                                  ? (lessonType == 'SemiPrivate'
+                                      ? mainBlue
+                                      : lightGreyFilter)
+                                  : black.withAlpha(100),
                         ),
                       ),
                     ),
@@ -339,7 +354,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
                         setState(() {
                           lessonType = 'Group';
                         });
-                         context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                        context.read<LessonsProvider>().updateSelectedPriceFor(
+                          "$lessonFor$horse$lessonType",
+                        );
                       }
                       : null,
 
@@ -370,12 +387,13 @@ class _PriceStapPartState extends State<PriceStapPart> {
                           shape: BoxShape.circle,
                           color:
                               (lessonDetailsProviderWatch
-                                              .lessonDetails
-                                              ?.semiPrivateActive ==
-                                          "True" &&
-                                      lessonType == 'Group')
-                                  ? mainBlue
-                                  : lightGreyFilter,
+                                          .lessonDetails
+                                          ?.groupActive ==
+                                      "True")
+                                  ? (lessonType == 'Group'
+                                      ? mainBlue
+                                      : lightGreyFilter)
+                                  : black.withAlpha(100),
                         ),
                       ),
                     ),
@@ -434,7 +452,10 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   lessonLevel = 'Beginner';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
+                ;
               },
               option: 'Beginner',
               select: lessonLevel == 'Beginner',
@@ -444,7 +465,10 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   lessonLevel = 'Intermediate';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
+                ;
               },
               option: 'Intermediate',
               select: lessonLevel == 'Intermediate',
@@ -454,7 +478,10 @@ class _PriceStapPartState extends State<PriceStapPart> {
                 setState(() {
                   lessonLevel = 'Advanced';
                 });
-                 context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");;
+                context.read<LessonsProvider>().updateSelectedPriceFor(
+                  "$lessonFor$horse$lessonType",
+                );
+                ;
               },
               option: 'Advanced',
               select: lessonLevel == 'Advanced',

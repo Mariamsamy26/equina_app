@@ -3,6 +3,7 @@ import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
 import 'package:equina_task/app/profile_cycle/views/profile_screen.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/helpers/navigation_helper.dart';
+import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:equina_task/widget/loding_gif.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   // ignore: use_super_parameters
@@ -39,19 +39,12 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Future<void> _initializeData() async {
-    int? id = await getUserId();
-    await context.read<LessonsProvider>().getAllLessons(id!);
+    int? userId = await MyApp().userIdFuture;
+    await context.read<LessonsProvider>().getAllLessons(userId!);
     dataLoaded = true;
     setState(() {});
   }
 
- 
-
-  Future<int?> getUserId ()async{
-    final prefs = await SharedPreferences.getInstance();
-    int? userId = prefs.getInt('user_id');
-    return userId;
-  }
 
   @override
   Widget build(BuildContext context) {
