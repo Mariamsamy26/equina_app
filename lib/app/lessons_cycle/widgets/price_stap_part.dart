@@ -1,11 +1,15 @@
 import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/custom_option_select.dart';
+import 'package:equina_task/app/lessons_cycle/widgets/titel_price_widget.dart';
 import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';
 import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+
+import '../../../helpers/navigation_helper.dart';
+import '../../../widget/ok_dialog.dart';
 
 // ignore: must_be_immutable
 class PriceStapPart extends StatefulWidget {
@@ -35,6 +39,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
       lessonId: widget.lessonid,
       contactId: userId!,
     );
+    context.read<LessonsProvider>().updateSelectedPriceFor(
+      "$lessonFor$horse$lessonType",
+    );
     print("lessonDetailsId: ${widget.lessonid},");
     print("userDetailsId: ${userId},");
   }
@@ -44,16 +51,9 @@ class _PriceStapPartState extends State<PriceStapPart> {
     final lessonDetailsProviderWatch =
         context.watch<LessonsProvider>().publicLessonDetails;
 
-    //     final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
-    //         WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<LessonsProvider>(). context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType");("$lessonFor$horse$lessonType");
-    // });
-    //  final  context.read<LessonsProvider>().updateSelectedPriceFor("$lessonFor$horse$lessonType"); =
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        /// Pricing
         Text(
           "Pricing:",
           style: TextManager.regular(
@@ -61,26 +61,7 @@ class _PriceStapPartState extends State<PriceStapPart> {
           ).copyWith(color: black, decoration: TextDecoration.none),
         ),
 
-        /// Lesson For
-        Row(
-          children: [
-            Container(
-              height: 15.h,
-              width: 15.h,
-              decoration: BoxDecoration(
-                color: mainPurble,
-                borderRadius: BorderRadius.all(Radius.circular(50.r)),
-              ),
-            ),
-            Text(
-              " lesson For",
-              style: TextManager.regular().copyWith(
-                color: black,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ],
-        ),
+        TitelPriceWidget(titel: " lesson For"),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -92,13 +73,29 @@ class _PriceStapPartState extends State<PriceStapPart> {
             ),
 
             CustomOptionSelect(
-              onPressed: () {
-                setState(() {
-                  lessonFor = 'adult';
-                });
-                context.read<LessonsProvider>().updateSelectedPriceFor(
-                  "$lessonFor$horse$lessonType",
-                );
+              onPressed:
+              //todo
+              () {
+                if (context.read<LessonsProvider>().ckickPriceNotZero(
+                      "adult$horse$lessonType",
+                    ) ==
+                    true) {
+                  setState(() {
+                    lessonFor = 'adult';
+                  });
+                } else {
+                  context.read<LessonsProvider>().updateSelectedPriceFor(
+                    "adult$horse$lessonType",
+                  );
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => OkDialog(
+                          title:
+                              'This Select is Disabled this \n Type of Lesson!',
+                        ),
+                  );
+                }
               },
               option: 'Adult',
               select: lessonFor == 'adult',
@@ -106,12 +103,23 @@ class _PriceStapPartState extends State<PriceStapPart> {
             SizedBox(width: 0.1.sw),
             CustomOptionSelect(
               onPressed: () {
-                setState(() {
-                  lessonFor = 'child';
-                });
-                context.read<LessonsProvider>().updateSelectedPriceFor(
-                  "$lessonFor$horse$lessonType",
-                );
+                if (context.read<LessonsProvider>().ckickPriceNotZero(
+                      "child$horse$lessonType",
+                    ) ==
+                    true) {
+                  setState(() {
+                    lessonFor = 'child';
+                  });
+                } else {
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => OkDialog(
+                          title:
+                              'This Select is Disabled this \n Type of Lesson!',
+                        ),
+                  );
+                }
               },
               option: 'Child',
               select: lessonFor == 'child',
@@ -126,26 +134,7 @@ class _PriceStapPartState extends State<PriceStapPart> {
           ],
         ),
 
-        /// horse
-        Row(
-          children: [
-            Container(
-              height: 15.h,
-              width: 15.h,
-              decoration: BoxDecoration(
-                color: mainPurble,
-                borderRadius: BorderRadius.all(Radius.circular(50.r)),
-              ),
-            ),
-            Text(
-              " horse",
-              style: TextManager.regular().copyWith(
-                color: black,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ],
-        ),
+        TitelPriceWidget(titel: " horse"),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -156,13 +145,27 @@ class _PriceStapPartState extends State<PriceStapPart> {
               color: mainPurble,
             ),
             CustomOptionSelect(
-              onPressed: () {
-                setState(() {
-                  horse = 'ClubHorse';
-                });
-                context.read<LessonsProvider>().updateSelectedPriceFor(
-                  "$lessonFor$horse$lessonType",
-                );
+               onPressed: () {
+                if (context.read<LessonsProvider>().ckickPriceNotZero(
+                      "${lessonFor}ClubHorse$lessonType",
+                    ) ==
+                    true) {
+                  setState(() {
+                    horse = 'ClubHorse';
+                  });
+                } else {
+                  context.read<LessonsProvider>().updateSelectedPriceFor(
+                    "$lessonFor$horse$lessonType",
+                  );
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => OkDialog(
+                          title:
+                              'This Select is Disabled this \n Type of Lesson!',
+                        ),
+                  );
+                }
               },
               option: 'Club',
               select: horse == 'ClubHorse',
@@ -170,12 +173,26 @@ class _PriceStapPartState extends State<PriceStapPart> {
             SizedBox(width: 0.1.sw),
             CustomOptionSelect(
               onPressed: () {
-                setState(() {
-                  horse = 'OwnHorse';
-                });
-                context.read<LessonsProvider>().updateSelectedPriceFor(
-                  "$lessonFor$horse$lessonType",
-                );
+                if (context.read<LessonsProvider>().ckickPriceNotZero(
+                      "${lessonFor}OwnHorse$lessonType",
+                    ) ==
+                    true) {
+                  setState(() {
+                    horse = 'OwnHorse';
+                  });
+                } else {
+                  context.read<LessonsProvider>().updateSelectedPriceFor(
+                    "$lessonFor$horse$lessonType",
+                  );
+                  showDialog(
+                    context: context,
+                    builder:
+                        (context) => OkDialog(
+                          title:
+                              'This Select is Disabled this \n Type of Lesson!',
+                        ),
+                  );
+                }
               },
               option: 'Own',
               select: horse == 'OwnHorse',
@@ -190,27 +207,7 @@ class _PriceStapPartState extends State<PriceStapPart> {
           ],
         ),
 
-        /// Lesson Type
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 15.h,
-              width: 15.h,
-              decoration: BoxDecoration(
-                color: mainPurble,
-                borderRadius: BorderRadius.all(Radius.circular(50.r)),
-              ),
-            ),
-            Text(
-              " Lesson Type",
-              style: TextManager.regular().copyWith(
-                color: black,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ],
-        ),
+        TitelPriceWidget(titel: " Lesson Type"),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -419,25 +416,7 @@ class _PriceStapPartState extends State<PriceStapPart> {
         ),
 
         /// Lesson Level
-        Row(
-          children: [
-            Container(
-              height: 15.h,
-              width: 15.h,
-              decoration: BoxDecoration(
-                color: mainPurble,
-                borderRadius: BorderRadius.all(Radius.circular(50.r)),
-              ),
-            ),
-            Text(
-              " Lesson Level",
-              style: TextManager.regular().copyWith(
-                color: black,
-                decoration: TextDecoration.none,
-              ),
-            ),
-          ],
-        ),
+        TitelPriceWidget(titel: " Lesson Level"),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
