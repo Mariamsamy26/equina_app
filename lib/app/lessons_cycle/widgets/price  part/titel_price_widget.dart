@@ -2,7 +2,7 @@ import 'package:equina_task/styles/text_mang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../styles/colors.dart';
+import '../../../../styles/colors.dart';
 
 class TitelPriceWidget extends StatelessWidget {
   String titel;

@@ -1,7 +1,7 @@
 import 'package:equina_task/app/lessons_cycle/models/lessons_list.dart';
 import 'package:equina_task/app/lessons_cycle/models/public_lesson_details.dart';
 import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
-import 'package:equina_task/app/lessons_cycle/widgets/price_stap_part.dart';
+import 'package:equina_task/app/lessons_cycle/widgets/price%20%20part/price_stap_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/Stap_two_part.dart';
 import 'package:equina_task/main.dart';
 import 'package:equina_task/styles/colors.dart';

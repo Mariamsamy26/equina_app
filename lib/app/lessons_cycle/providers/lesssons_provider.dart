@@ -80,6 +80,7 @@ class LessonsProvider with ChangeNotifier {
 
   if (selectedPrice != null && selectedPrice > 0) {
     updateSelectedPriceFor(_selectedPriceFor);
+     notifyListeners();
     return true;
   } else {
     return false;

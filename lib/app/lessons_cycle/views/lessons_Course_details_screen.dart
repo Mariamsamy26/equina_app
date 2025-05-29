@@ -3,7 +3,7 @@ import 'package:equina_task/app/lessons_cycle/providers/lesssons_provider.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/detels_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/img_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/offer_part.dart';
-import 'package:equina_task/app/lessons_cycle/widgets/price_stap_part.dart';
+import 'package:equina_task/app/lessons_cycle/widgets/price%20%20part/price_stap_part.dart';
 import 'package:equina_task/app/lessons_cycle/widgets/steps_part.dart';
 import 'package:equina_task/helpers/application_dimentions.dart';
 import 'package:equina_task/main.dart';
