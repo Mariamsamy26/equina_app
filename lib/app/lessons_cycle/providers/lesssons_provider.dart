@@ -72,4 +72,19 @@ class LessonsProvider with ChangeNotifier {
         return 0;
     }
   }
+
+//* PRICE not 0
+  bool ckickPriceNotZero(String value) {
+  _selectedPriceFor = value;
+  final selectedPrice =  getSelectedPrice();
+
+  if (selectedPrice != null && selectedPrice > 0) {
+    updateSelectedPriceFor(_selectedPriceFor);
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
 }
