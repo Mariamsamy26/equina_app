@@ -312,10 +312,9 @@ class _RegisterWigetState extends State<RegisterWiget> {
                           _passwordController.text.isNotEmpty &&
                           _passwordController.text ==
                               _confirmPasswordController.text) {
-                        Navigation().goToScreen(
+                        Navigation().goToScreenAndClearAll(
                           context,
                           (context) => HomeScreen(),
-                          // goToScreenAndClearAll
                         );
                       }
 
